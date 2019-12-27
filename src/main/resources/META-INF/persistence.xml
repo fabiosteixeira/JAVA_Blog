@@ -13,6 +13,8 @@
 
 		<!-- Entities -->
 		<class>com.javablog.app.entity.AuthorEntity</class>
+		<class>com.javablog.app.entity.PostEntity</class>
+		<class>com.javablog.app.entity.CommentEntity</class>
 
 		
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>

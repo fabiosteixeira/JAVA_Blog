@@ -31,13 +31,13 @@ public class AuthorServiceImpl extends AbstractServiceEntity<Long, AuthorEntity>
 		List<AuthorEntity> list = authorRepository.retrieveAll();
 		
 		// Mounting DTO in the same object
-		List<AuthorEntity> newAuthorList = new ArrayList<AuthorEntity>();
+		List<AuthorEntity> newList = new ArrayList<AuthorEntity>();
 		for(AuthorEntity a : list) {
 			AuthorEntity newA = getAuthorDTO(a);	
-			newAuthorList.add(newA);
+			newList.add(newA);
 		}
-		LOGGER.info("AuthorServiceImpl.retrieveAll: "+newAuthorList);
-		return newAuthorList;
+		LOGGER.info("AuthorServiceImpl.retrieveAll: "+newList);
+		return newList;
 	}
 //
 //	@Override

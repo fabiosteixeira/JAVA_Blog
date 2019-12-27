@@ -8,7 +8,7 @@ import com.javablog.app.entity.AuthorEntity;
 import com.javablog.app.model.service.IEntityService;
 
 @Local
-public interface IAuthorService  extends IEntityService<Long, AuthorEntity>{
+public interface IAuthorService extends IEntityService<Long, AuthorEntity>{
 
 	List<AuthorEntity> retrieveAll();
 

@@ -27,7 +27,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 public class AuthorEntity implements IEntity<Long>{
 
-
 	private static final long serialVersionUID = 7739781157774478940L;
 
 	@Id 
