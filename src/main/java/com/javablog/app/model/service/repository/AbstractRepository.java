@@ -14,7 +14,7 @@ import com.javablog.app.entity.IEntity;
  */
 public abstract class AbstractRepository<PK extends Serializable, E extends IEntity<PK>> extends AbstractBaseRepository<PK, E> {
 
-	@PersistenceContext(unitName = "product-persistence-unit")
+	@PersistenceContext(unitName = "javablog-persistence-unit")
 	private EntityManager entityManager;
 
 	@Override
