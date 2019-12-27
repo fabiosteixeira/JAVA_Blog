@@ -1,4 +1,4 @@
-package com.template.app.entity;
+package com.javablog.app.entity;
 
 import java.io.Serializable;
 

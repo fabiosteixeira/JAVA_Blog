@@ -1,4 +1,4 @@
-package com.template.app.rest.company;
+package com.javablog.app.rest.company;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +10,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.template.app.entity.CompanyEntity;
-import com.template.app.exception.AppException;
+import com.javablog.app.entity.CompanyEntity;
+import com.javablog.app.exception.AppException;
 
 /**
  * Class Rest to provide company rest operations

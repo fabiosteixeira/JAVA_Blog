@@ -1,5 +1,5 @@
 
-package com.template.app.messages;
+package com.javablog.app.messages;
 
 /**
  * Interface to message keys

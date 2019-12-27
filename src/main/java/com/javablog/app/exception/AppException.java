@@ -1,4 +1,4 @@
-package com.template.app.exception;
+package com.javablog.app.exception;
 
 import javax.ejb.ApplicationException;
 

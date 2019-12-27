@@ -1,0 +1,10 @@
+Cenário:
+
+
+•Implementar um backend para um serviço de um blog, em que haverá AUTOR e POSTAGEM.
+
+•O autor terá um CRUD de postagens.
+
+•Usuários poderão acessar as postagens por ordem cronológica ou por autor.
+
+•O usuário poderá adicionar COMENTARIO à postagem. Os comentários seguirão ordem cronológica.

@@ -1,6 +1,6 @@
-package com.template.app.messages;
+package com.javablog.app.messages;
 
-import com.template.app.exception.AppException;
+import com.javablog.app.exception.AppException;
 
 /**
  * 

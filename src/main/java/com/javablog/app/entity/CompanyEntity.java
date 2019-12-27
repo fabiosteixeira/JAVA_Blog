@@ -1,4 +1,4 @@
-package com.template.app.entity;
+package com.javablog.app.entity;
 
 public class CompanyEntity implements IEntity<Long> {
 
