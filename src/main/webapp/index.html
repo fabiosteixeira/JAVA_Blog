@@ -13,18 +13,36 @@
 	
 README
 
-Comments:
+Comentários:
 =========
 
 API de simulação de um BLOG para o exame especial da matéria de Backend JAVA da Pós em Desenvolvimento WEB Full Stack.
 
+- EJB3 Stateless para implementar serviços
+- JPA para persistir objetos no banco de dados (Hibernate utilizado como servidor de aplicação)
+- WildFly 10.1.0.Final embarcado utilizado para rodar a aplicação e testes de integração
+- H2 utilizado como banco de dados "in-memory", tanto com o servidor de aplicações quando nos testes de integração
+- Criação do banco de dados, das tabelas e inserção inicial de dados realizada pela aplicação durante carga inicial  
+- Carga inicial realizada a partir do arquivo insert.sql:
+	insert into AUTHOR (id, name) values ('1', 'Fábio Teixeira');
+	insert into AUTHOR (id, name) values ('2', 'Jonh Walker');
+	insert into AUTHOR (id, name) values ('3', 'Bobby Singer');
+	insert into AUTHOR (id, name) values ('4', 'Samuel Campbell');
 
-Commands:
+
+Comandos:
 =========
 
-To run tests:  mvn test
+Para rodar os testes:  mvn test
 
-To start application:  mvn -Dmaven.test.skip=true wildfly:run
+Para inicializar a aplicação:  mvn -Dmaven.test.skip=true wildfly:run
+
+
+Testes na aplicação:	
+==================
+
+1° Retornando a lista de autores
+	curl -sD - -X GET -H "Content-Type: application/json" "http://localhost:8080/javablog/rest/author/all"
 
 	
 	</pre>

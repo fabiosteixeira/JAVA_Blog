@@ -1,44 +1,45 @@
 package com.javablog.app.model.service.repository.author;
 
+import java.util.List;
+import java.util.logging.Logger;
+
+import javax.persistence.Query;
+
 import com.javablog.app.entity.AuthorEntity;
+import com.javablog.app.exception.AppException;
+import com.javablog.app.messages.AppBeanMessages;
 import com.javablog.app.model.service.repository.AbstractRepository;
 
 public class AuthorRepository extends AbstractRepository<Long, AuthorEntity> {
 
-//	private final static Logger LOGGER = Logger.getLogger(AuthorRepository.class.getName());
+	private final static Logger LOGGER = Logger.getLogger(AuthorRepository.class.getName());
 
 	@Override
 	public Class<AuthorEntity> getEntityType() {
 		return AuthorEntity.class;
 	}
 
-//	public List<ProductEntity> retrieveAll(String relationships) {
-//		try {
-//			LOGGER.info("ProductRepository.retrieveAll: "+relationships);
-//			String namedQuery = "ProductEntity.retrieveAll";
-//			if (relationships!=null && relationships.equals("i")) {
-//				namedQuery = "ProductEntity.retrieveAllI";
-//			} else if (relationships!=null && relationships.equals("p")) {
-//				namedQuery = "ProductEntity.retrieveAllP";
-//			} else if (relationships!=null && relationships.equals("ip")) {
-//				namedQuery = "ProductEntity.retrieveAllIP";
-//			}	
-//
-//			Query query = getEntityManager().createNamedQuery(namedQuery);
-//
-//			List<ProductEntity> list = (List<ProductEntity>)query.getResultList( );
-//			LOGGER.info("ProductRepository.retrieveAll: return "+list);
-//			return list;
-//
-//		} catch (AppException e) {
-//			LOGGER.severe("ProductRepository.retrieveAll AppException: "+e.getMessage());
-//			throw e;
-//		} catch (Exception e) {
-//			LOGGER.severe("ProductRepository.retrieveAll Exception: "+e.getMessage());
-//			throw AppBeanMessages.PERSISTENCE_ERROR.create(e, e.getMessage());
-//		}
-//	}
-//
+	public List<AuthorEntity> retrieveAll() {
+		try {
+			LOGGER.info("AuthorEntity.retrieveAll");
+			String namedQuery = "AuthorEntity.retrieveAll";
+
+			Query query = getEntityManager().createNamedQuery(namedQuery);
+
+			@SuppressWarnings("unchecked")
+			List<AuthorEntity> list = (List<AuthorEntity>)query.getResultList( );
+			LOGGER.info("AuthorEntity.retrieveAll: return "+list);
+			return list;
+
+		} catch (AppException e) {
+			LOGGER.severe("AuthorEntity.retrieveAll AppException: "+e.getMessage());
+			throw e;
+		} catch (Exception e) {
+			LOGGER.severe("AuthorEntity.retrieveAll Exception: "+e.getMessage());
+			throw AppBeanMessages.PERSISTENCE_ERROR.create(e, e.getMessage());
+		}
+	}
+
 //	public ProductEntity get(Long id, String relationships) {
 //		try {
 //			LOGGER.info("ProductRepository.get: id "+id+" relationships:"+relationships);

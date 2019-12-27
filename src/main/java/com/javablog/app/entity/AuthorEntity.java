@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -18,6 +20,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @SequenceGenerator(name = "AUTHOR_ID_GENERATOR", sequenceName = "SE_AUTHOR", allocationSize = 1)
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
+
+@NamedQueries({
+    @NamedQuery(name="AuthorEntity.retrieveAll", query="Select distinct a from AuthorEntity a order by a.name"),
+}) 
 
 public class AuthorEntity implements IEntity<Long>{
 

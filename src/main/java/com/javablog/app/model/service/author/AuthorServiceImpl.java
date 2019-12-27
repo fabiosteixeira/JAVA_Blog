@@ -1,5 +1,9 @@
 package com.javablog.app.model.service.author;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -11,30 +15,30 @@ import com.javablog.app.model.service.repository.author.AuthorRepository;
 @Stateless
 public class AuthorServiceImpl extends AbstractServiceEntity<Long, AuthorEntity> implements IAuthorService {
 
-//	private final static Logger LOGGER = Logger.getLogger(AuthorServiceImpl.class.getName());	
+	private final static Logger LOGGER = Logger.getLogger(AuthorServiceImpl.class.getName());	
 	
 	@Inject
-	private AuthorRepository productRepository;
+	private AuthorRepository authorRepository;
 
 	@Override
 	protected IEntityRepository<Long, AuthorEntity> getEntityRepository() {
-		return productRepository;
+		return authorRepository;
 	}
 
-//	@Override
-//	public List<ProductEntity> retrieveAll(String relationships) {	
-//		LOGGER.info("ProductServiceImpl.retrieveAll");
-//		List<ProductEntity> productList = productRepository.retrieveAll(relationships);
-//		
-//		// Mounting DTO in the same object
-//		List<ProductEntity> newProductList = new ArrayList<ProductEntity>();
-//		for(ProductEntity p : productList) {
-//			ProductEntity newP = getProductDTO(relationships, p);	
-//			newProductList.add(newP);
-//		}
-//		LOGGER.info("ProductServiceImpl.retrieveAll: "+newProductList);
-//		return newProductList;
-//	}
+	@Override
+	public List<AuthorEntity> retrieveAll() {	
+		LOGGER.info("AuthorEntity.retrieveAll");
+		List<AuthorEntity> list = authorRepository.retrieveAll();
+		
+		// Mounting DTO in the same object
+		List<AuthorEntity> newAuthorList = new ArrayList<AuthorEntity>();
+		for(AuthorEntity a : list) {
+			AuthorEntity newA = getAuthorDTO(a);	
+			newAuthorList.add(newA);
+		}
+		LOGGER.info("AuthorServiceImpl.retrieveAll: "+newAuthorList);
+		return newAuthorList;
+	}
 //
 //	@Override
 //	public ProductEntity get(Long id) {
@@ -56,26 +60,16 @@ public class AuthorServiceImpl extends AbstractServiceEntity<Long, AuthorEntity>
 //		}
 //		
 //	}
-//	
-//	
-//	protected ProductEntity getProductDTO(String relationships, ProductEntity p) {
-//		LOGGER.info("ProductServiceImpl.getProductDTO");
-//		ProductEntity newP = new ProductEntity();
-//		newP.setId(p.getId());
-//		newP.setName(p.getName());
-//		newP.setDescription(p.getDescription());
-//		
-//		if (relationships!=null && relationships.equals("i")) {
-//			newP.setImages(p.getImages());
-//		} else if (relationships!=null && relationships.equals("p")) {
-//			newP.setParentProduct(p.getParentProduct());
-//		} else if (relationships!=null && relationships.equals("ip")) {
-//			newP.setImages(p.getImages());
-//			newP.setParentProduct(p.getParentProduct());
-//		}
-//		return newP;
-//	}
-//
+	
+	
+	protected AuthorEntity getAuthorDTO(AuthorEntity a) {
+		LOGGER.info("AuthorServiceImpl.getAuthorDTO");
+		AuthorEntity newA = new AuthorEntity();
+		newA.setId(a.getId());
+		newA.setName(a.getName());				
+		return newA;
+	}
+
 //	@Override
 //	public List<ProductEntity> getChildProducts(Long id) {
 //		LOGGER.info("ProductServiceImpl.getChildProducts");
