@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -28,7 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 
 @NamedQueries({
-    @NamedQuery(name="PostEntity.retrieveAll", query="Select distinct p from PostEntity p left outer join p.author a left outer join p.comments c order by p.id")
+    @NamedQuery(name="PostEntity.retrieveAll", query="Select distinct p from PostEntity p "),
 }) 
 
 public class PostEntity implements IEntity<Long>{
@@ -40,7 +41,8 @@ public class PostEntity implements IEntity<Long>{
 	private Long id;
 	
 	@NotNull
-	@ManyToOne (targetEntity = AuthorEntity.class, fetch = FetchType.LAZY)
+	@ManyToOne (targetEntity = AuthorEntity.class)
+	@JoinColumn(name="author_id", referencedColumnName="id")
 	private AuthorEntity author;
 	
 	@NotNull 
