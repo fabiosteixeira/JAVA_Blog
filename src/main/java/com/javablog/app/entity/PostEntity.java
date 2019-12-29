@@ -1,5 +1,7 @@
 package com.javablog.app.entity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -16,6 +18,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -29,7 +32,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 
 @NamedQueries({
-    @NamedQuery(name="PostEntity.retrieveAll", query="Select distinct p from PostEntity p "),
+    @NamedQuery(name="PostEntity.retrieveAll", query="Select p from PostEntity p order by p.data"),
+    @NamedQuery(name="PostEntity.retriveAllByAuthor", query="Select p from PostEntity p left outer join p.author a order by p.author.name")
 }) 
 
 public class PostEntity implements IEntity<Long>{
@@ -53,6 +57,11 @@ public class PostEntity implements IEntity<Long>{
 	@OneToMany (targetEntity = CommentEntity.class, fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="post")
 	private List<CommentEntity> comments;	
 	
+	private Date data;
+	
+	@Transient
+	private String dataText;
+	
 	@Override
 	public Long getId() {
 		return id;
@@ -68,6 +77,14 @@ public class PostEntity implements IEntity<Long>{
 	
 	public List<CommentEntity> getComments() {
 		return comments;
+	}
+	
+	public Date getData() {
+		return data;
+	}
+	
+	public String getDataText() {
+		return dataText;
 	}
 
 	@Override
@@ -85,6 +102,18 @@ public class PostEntity implements IEntity<Long>{
 
 	public void setComments(List<CommentEntity> comments) {
 		this.comments = comments;
-	}	
+	}
 
+	public void setData(Date data) {
+		this.data = data;
+		if (data!=null) {
+			SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+			setDataText(formatter.format(data));
+		}
+	}
+
+	public void setDataText(String dataText) {
+		this.dataText = dataText;
+	}		
+		
 }

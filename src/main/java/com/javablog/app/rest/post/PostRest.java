@@ -1,5 +1,6 @@
 package com.javablog.app.rest.post;
 
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -45,9 +46,19 @@ private final static Logger LOGGER = Logger.getLogger(AuthorRest.class.getName()
 	@Path("/all")
 	public List<PostEntity> getAllPosts() throws AppException{
 		LOGGER.info("PostRest.getAllPosts");
-		List<PostEntity> list = postService.retrieveAll();
+		List<PostEntity> list = postService.retrieveAll("");
 		handleNoContent(list);
 		LOGGER.info("PostRest.getAllPosts: "+list);
+		return list;
+	}
+	
+	@GET
+	@Path("/all/a")
+	public List<PostEntity> getAllPostsByAuthor() throws AppException{
+		LOGGER.info("PostRest.getAllPostsByAuthor");
+		List<PostEntity> list = postService.retrieveAll("a");
+		handleNoContent(list);
+		LOGGER.info("PostRest.getAllPostsByAuthor: "+list);
 		return list;
 	}
 	
@@ -73,8 +84,9 @@ private final static Logger LOGGER = Logger.getLogger(AuthorRest.class.getName()
 			}
 			
 			e.setAuthor(a);
-			e.setContent(entity.getContent());						
-			PostEntity out = update(e);			
+			e.setContent(entity.getContent());		
+			e.setData(new Date(System.currentTimeMillis()));
+			PostEntity out = update(e);	
 			LOGGER.info("PostServiceImpl.create: " + out);
 			return out;	
 		}catch(Exception ex){

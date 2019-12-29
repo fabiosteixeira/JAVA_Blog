@@ -24,11 +24,16 @@ public class PostRepository extends AbstractRepository<Long, PostEntity> {
 		return PostEntity.class;
 	}
 	
-	public List<PostEntity> retrieveAll() {
+	public List<PostEntity> retrieveAll(String orderBy) {
 		try {
 			LOGGER.info("PostEntity.retrieveAll");
-			String namedQuery = "PostEntity.retrieveAll";
-
+			
+			String namedQuery = "";
+			if (orderBy.isEmpty())			
+				namedQuery = "PostEntity.retrieveAll";
+			else if (orderBy=="a")
+				namedQuery = "PostEntity.retriveAllByAuthor";
+			
 			Query query = getEntityManager().createNamedQuery(namedQuery);
 
 			@SuppressWarnings("unchecked")

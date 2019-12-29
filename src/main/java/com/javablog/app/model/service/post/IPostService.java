@@ -8,7 +8,7 @@ import com.javablog.app.model.service.IEntityService;
 
 public interface IPostService extends IEntityService<Long, PostEntity>{
 	
-	List<PostEntity> retrieveAll();
+	List<PostEntity> retrieveAll(String orderBy);
 	
 	PostEntity create(PostEntity entity) throws AppException;
 	

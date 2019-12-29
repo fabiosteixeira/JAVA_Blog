@@ -23,10 +23,10 @@ public class PostServiceImpl extends AbstractServiceEntity<Long, PostEntity> imp
 		return postRepository;
 	}
 	
-	@Override
-	public List<PostEntity> retrieveAll() {	
+	@Override	
+	public List<PostEntity> retrieveAll(String orderBy) {
 		LOGGER.info("PostEntity.retrieveAll");
-		List<PostEntity> list = postRepository.retrieveAll();
+		List<PostEntity> list = postRepository.retrieveAll(orderBy);
 		
 		// Mounting DTO in the same object
 		List<PostEntity> newList = new ArrayList<PostEntity>();
@@ -45,6 +45,7 @@ public class PostServiceImpl extends AbstractServiceEntity<Long, PostEntity> imp
 		newA.setAuthor(a.getAuthor());
 		newA.setContent(a.getContent());
 		newA.setComments(a.getComments());
+		newA.setData(a.getData());
 		return newA;
 	}
 	
