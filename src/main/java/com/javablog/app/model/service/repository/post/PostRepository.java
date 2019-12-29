@@ -48,7 +48,10 @@ public class PostRepository extends AbstractRepository<Long, PostEntity> {
 	public PostEntity update(PostEntity postEntity) {
 		try {
 			userTransaction.begin();
-			getEntityManager().persist(postEntity);
+			if (postEntity.getId()==null)
+				getEntityManager().persist(postEntity);
+			else
+				getEntityManager().merge(postEntity);
 			userTransaction.commit();
 			return postEntity;
 		} catch (AppException e) {
