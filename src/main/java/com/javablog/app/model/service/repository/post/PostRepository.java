@@ -3,7 +3,9 @@ package com.javablog.app.model.service.repository.post;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.annotation.Resource;
 import javax.persistence.Query;
+import javax.transaction.UserTransaction;
 
 import com.javablog.app.entity.PostEntity;
 import com.javablog.app.exception.AppException;
@@ -14,6 +16,9 @@ public class PostRepository extends AbstractRepository<Long, PostEntity> {
 	
 	private final static Logger LOGGER = Logger.getLogger(PostRepository.class.getName());
 
+	@Resource
+    private UserTransaction userTransaction;
+	
 	@Override
 	public Class<PostEntity> getEntityType() {
 		return PostEntity.class;
@@ -39,4 +44,18 @@ public class PostRepository extends AbstractRepository<Long, PostEntity> {
 			throw AppBeanMessages.PERSISTENCE_ERROR.create(e, e.getMessage());
 		}
 	}
+	
+	public PostEntity update(PostEntity postEntity) {
+		try {
+			userTransaction.begin();
+			getEntityManager().persist(postEntity);
+			userTransaction.commit();
+			return postEntity;
+		} catch (AppException e) {
+			throw e;
+		} catch (Exception e) {
+			throw AppBeanMessages.PERSISTENCE_ERROR.create(e, e.getMessage());
+		}		
+	}
+	
 }

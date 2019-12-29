@@ -39,13 +39,13 @@ public class AuthorServiceImpl extends AbstractServiceEntity<Long, AuthorEntity>
 		LOGGER.info("AuthorServiceImpl.retrieveAll: "+newList);
 		return newList;
 	}
-//
-//	@Override
-//	public ProductEntity get(Long id) {
-//		LOGGER.info("ProductServiceImpl.get");
-//		return get(id, "");
-//	}
-//	
+
+	@Override
+	public AuthorEntity get(Long id) {
+		LOGGER.info("AuthorServiceImpl.get");
+		return get(id);
+	}
+	
 //	@Override
 //	public ProductEntity get(Long id, String relationships) {
 //		LOGGER.info("ProductServiceImpl.get(relationships)");
