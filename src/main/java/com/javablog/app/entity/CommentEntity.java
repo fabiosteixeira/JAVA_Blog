@@ -1,5 +1,7 @@
 package com.javablog.app.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,6 +43,8 @@ public class CommentEntity implements IEntity<Long>{
 	@Column
 	private String content;
 	
+	private Date data;
+	
 	@Override
 	public Long getId() {
 		return id;
@@ -54,6 +58,10 @@ public class CommentEntity implements IEntity<Long>{
 		return post;
 	}
 	
+	public Date getData() {
+		return data;
+	}
+	
 	@Override
 	public void setId(Long id) {
 		this.id = id;		
@@ -65,6 +73,10 @@ public class CommentEntity implements IEntity<Long>{
 
 	public void setPost(PostEntity post) {
 		this.post = post;
+	}
+	
+	public void setData(Date data) {
+		this.data = data;
 	}
 	
 }

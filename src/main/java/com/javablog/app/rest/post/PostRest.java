@@ -87,10 +87,10 @@ private final static Logger LOGGER = Logger.getLogger(AuthorRest.class.getName()
 			e.setContent(entity.getContent());		
 			e.setData(new Date(System.currentTimeMillis()));
 			PostEntity out = update(e);	
-			LOGGER.info("PostServiceImpl.create: " + out);
+			LOGGER.info("PostRest.create: " + out);
 			return out;	
 		}catch(Exception ex){
-	    	LOGGER.severe("PostServiceImpl.create: Exception " + ex.getMessage());
+	    	LOGGER.severe("PostRest.create: Exception " + ex.getMessage());
 	    	return null;
 	    }	
 	}

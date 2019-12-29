@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @NamedQueries({
     @NamedQuery(name="PostEntity.retrieveAll", query="Select p from PostEntity p order by p.data"),
-    @NamedQuery(name="PostEntity.retriveAllByAuthor", query="Select p from PostEntity p left outer join p.author a order by p.author.name")
+    @NamedQuery(name="PostEntity.retriveAllByAuthor", query="Select p from PostEntity p left outer join p.author a order by p.author.name, p.data")
 }) 
 
 public class PostEntity implements IEntity<Long>{
