@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -103,6 +104,22 @@ private final static Logger LOGGER = Logger.getLogger(AuthorRest.class.getName()
 		}catch(Exception ex){
 	    	LOGGER.severe("PostServiceImpl.update: Exception " + ex.getMessage());
 	    	return null;
+	    }
+	}
+	
+	@DELETE
+	@Path("/{id}")
+	public boolean delete(@PathParam("id") Long entityId) throws AppException {
+		LOGGER.info("PostRest.delete");
+		try {
+			PostEntity e = postService.get(entityId);			
+			if (e == null)
+				throw new AppException("Post não localizado para exclusão.");									
+			delete(e);
+			return true;
+		}catch(Exception ex){
+	    	LOGGER.severe("PostServiceImpl.delete: Exception " + ex.getMessage());
+	    	return false;
 	    }
 	}
 	

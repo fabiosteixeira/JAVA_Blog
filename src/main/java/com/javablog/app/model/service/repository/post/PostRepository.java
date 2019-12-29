@@ -61,4 +61,16 @@ public class PostRepository extends AbstractRepository<Long, PostEntity> {
 		}		
 	}
 	
+	public void delete(PostEntity postEntity) {
+		try {
+			userTransaction.begin();
+			getEntityManager().remove(getEntityManager().getReference(PostEntity.class, postEntity.getId()));
+			userTransaction.commit();
+		} catch (AppException e) {
+			throw e;
+		} catch (Exception e) {
+			throw AppBeanMessages.PERSISTENCE_ERROR.create(e, e.getMessage());
+		}
+	}
+	
 }
