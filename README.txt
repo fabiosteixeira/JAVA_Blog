@@ -1,18 +1,60 @@
 README
 
-Comments:
+Comentários:
 =========
 
+API de simulação de um BLOG para o exame especial da matéria de Backend JAVA da Pós em Desenvolvimento WEB Full Stack.
+
+- EJB3 Stateless para implementar serviços
+- JPA para persistir objetos no banco de dados (Hibernate utilizado como servidor de aplicação)
+- WildFly 10.1.0.Final embarcado utilizado para rodar a aplicação e testes de integração
+- H2 utilizado como banco de dados "in-memory", tanto com o servidor de aplicações quando nos testes de integração
+- Criação do banco de dados, das tabelas e inserção inicial de dados realizada pela aplicação durante carga inicial  
+- Carga inicial realizada a partir do arquivo insert.sql:
+	insert into AUTHOR (id, name) values ('1', 'Fábio Teixeira');
+	insert into AUTHOR (id, name) values ('2', 'Jonh Walker');
+	insert into AUTHOR (id, name) values ('3', 'Bobby Singer');
+	insert into AUTHOR (id, name) values ('4', 'Samuel Campbell');
+	insert into POST (id, author_id, content, data) values ('1', '1', 'Primeiro post da aplicação.', '2019-01-01');
+	insert into POST (id, author_id, content, data) values ('2', '4', 'Segundo post da aplicação.', '2018-01-01');
+	insert into COMMENT (id, post_id, content) values ('1', '1', 'Esse é o primeiro comentário');
+	insert into COMMENT (id, post_id, content) values ('2', '1', 'Esse é o segundo comentário');
 
 
-Commands:
+Comandos:
 =========
 
-To run tests:  mvn test
+Para rodar os testes:  mvn test
 
-To start application:  mvn -Dmaven.test.skip=true wildfly:run
+Para inicializar a aplicação:  mvn -Dmaven.test.skip=true wildfly:run
 
 
-Application Tests:	
+Testes na aplicação:	
 ==================
 
+- AUTORES
+	1° Retornando a lista de autores
+		curl -sD - -X GET -H "Content-Type: application/json" "http://localhost:8080/javablog/rest/author/all"
+	
+- CRUD DE POSTS
+	2° Retornando a lista de posts por ordem cronológica
+		curl -sD - -X GET -H "Content-Type: application/json" "http://localhost:8080/javablog/rest/post/all"
+		
+	3° Retornando a lista de posts por ordem de autor
+		curl -sD - -X GET -H "Content-Type: application/json" "http://localhost:8080/javablog/rest/post/all/a"
+		
+	4° Retornando dados de um post específico
+		curl -sD - -X GET -H "Content-Type: application/json" "http://localhost:8080/javablog/rest/post/1"
+		
+	5° Criando um novo post
+		curl -sD - -X POST -H "Content-Type: application/json" "http://localhost:8080/javablog/rest/post/create" -d "{\"author_id\":\"1\",\"content\":\"Post INSERIDO pelo serviço.\"}"
+		
+	6° Atualizando um post
+		curl -sD - -X PUT -H "Content-Type: application/json" "http://localhost:8080/javablog/rest/post/1" -d "{\"author_id\":\"1\",\"content\":\"Post ALTERADO pelo serviço.\"}"
+		
+	7° Apagando um post	
+		curl -sD - -X DELETE -H "Content-Type: application/json" "http://localhost:8080/javablog/rest/post/2"
+	
+- COMENTÁRIOS
+	8° Inserindo um novo comentário a um post
+		curl -sD - -X POST -H "Content-Type: application/json" "http://localhost:8080/javablog/rest/comment/create" -d "{\"post_id\":\"1\",\"content\":\"Comentário inserido pelo serviço.\"}"
